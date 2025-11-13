@@ -1,0 +1,15 @@
+{% extends "base.html" %}
+{% block title %}Home{% endblock %}
+{% block content %}
+<div class="text-center mt-10">
+  <h1 class="text-4xl font-bold mb-4">Personal Planner App</h1>
+  {% if user %}
+    <p class="text-gray-600 mb-4">Welcome back, {{ user }}!</p>
+    <a href="/profile" class="bg-blue-600 text-white px-5 py-2 rounded hover:bg-blue-700">Go to Profile</a>
+  {% else %}
+    <p class="text-gray-600 mb-4">Plan your day — sign in or create an account.</p>
+    <a href="/login" class="bg-blue-600 text-white px-5 py-2 rounded hover:bg-blue-700">Login</a>
+    <a href="/register" class="bg-gray-200 text-gray-700 px-5 py-2 rounded hover:bg-gray-300 ml-2">Sign Up</a>
+  {% endif %}
+</div>
+{% endblock %}

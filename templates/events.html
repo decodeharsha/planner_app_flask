@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Event Planner</title>
+  <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+  <div class="container">
+    <h1>📅 Event Planner</h1>
+
+    <form method="POST" action="/add_event">
+      <input type="text" name="title" placeholder="Event Title" required>
+      <input type="text" name="desc" placeholder="Description">
+      <input type="date" name="date" required>
+      <input type="time" name="time" required>
+      <button type="submit">Add Event</button>
+    </form>
+
+    {% if today_view %}
+      <h2>Today's Events ({{ events|length }})</h2>
+      <a href="/events" class="switch-link">Show All Events</a>
+    {% else %}
+      <h2>All Upcoming Events</h2>
+      <a href="/today" class="switch-link">Show Today's Events</a>
+    {% endif %}
+
+    <ul>
+      {% for e in events %}
+        <li>
+          <strong>{{ e.title }}</strong> — {{ e.desc }}<br>
+          📅 {{ e.date }} ⏰ {{ e.time }}
+          <a href="/delete_event/{{ loop.index0 }}">❌</a>
+        </li>
+      {% else %}
+        <p>No events found!</p>
+      {% endfor %}
+    </ul>
+
+    <a class="back-link" href="/">🏠 Back Home</a>
+  </div>
+</body>
+</html>

@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>{% block title %}Personal Planner{% endblock %}</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+</head>
+<body class="bg-gray-50 text-gray-800">
+  <nav class="bg-blue-600 p-4 text-white flex justify-between">
+    <a href="/" class="font-semibold text-lg">Planner</a>
+    <div>
+      {% if session.username %}
+        <a href="/profile" class="mx-2 hover:underline">Profile</a>
+        <a href="/tasks" class="mx-2 hover:underline">Tasks</a>
+        <a href="/events" class="mx-2 hover:underline">Events</a>
+        <a href="/logout" class="mx-2 hover:underline">Logout</a>
+      {% else %}
+        <a href="/login" class="mx-2 hover:underline">Login</a>
+        <a href="/register" class="mx-2 hover:underline">Sign Up</a>
+      {% endif %}
+    </div>
+  </nav>
+
+  <main class="p-6">
+    {% block content %}{% endblock %}
+  </main>
+</body>
+</html>
