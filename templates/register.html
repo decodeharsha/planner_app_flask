@@ -9,11 +9,17 @@
   <form method="POST" class="space-y-3">
     <input name="username" placeholder="Username"
       class="w-full border p-2 rounded" required>
-    <input type="password" name="password" placeholder="Password"
-      class="w-full border p-2 rounded" required>
-    <button class="w-full bg-blue-600 text-white py-2 rounded hover:bg-blue-700">
-      Register
-    </button>
+    <!-- Password input + toggle -->
+    <div class="relative">
+      <input type="password" name="password" id="password"
+        placeholder="Password"
+        class="w-full border p-2 rounded" required>
+
+      <button type="button"
+        onclick="togglePassword()"
+        class="absolute right-3 top-2 text-gray-500 hover:text-gray-800 text-lg">
+        👁️
+      </button>
   </form>
   <p class="text-sm text-center mt-3">
     Already have an account?

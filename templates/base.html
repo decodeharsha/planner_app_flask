@@ -23,6 +23,32 @@
 
   <main class="p-6">
     {% block content %}{% endblock %}
+    {% with messages = get_flashed_messages() %}
+  {% if messages %}
+    <div class="max-w-lg mx-auto mt-4">
+      {% for msg in messages %}
+        <div class="bg-red-100 text-red-700 border border-red-300 py-2 px-4 rounded mb-2 text-center">
+          {{ msg }}
+        </div>
+      {% endfor %}
+    </div>
+  {% endif %}
+{% endwith %}
+
   </main>
+<script>
+function togglePassword() {
+  const field = document.getElementById("password");
+  const button = event.target;
+
+  if (field.type === "password") {
+    field.type = "text";
+    button.textContent = "👁️"; // Change icon when visible
+  } else {
+    field.type = "password";
+    button.textContent = "👁️"; // Change icon back
+  }
+}
+</script>
 </body>
 </html>
