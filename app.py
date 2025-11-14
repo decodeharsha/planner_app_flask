@@ -66,15 +66,17 @@ def home():
 @app.route("/register", methods=["GET", "POST"])
 def register():
     if request.method == "POST":
-        username = request.form["username"]
+        username = request.form["username"].strip()
         password = request.form["password"]
 
         users = load_users()
 
+        # prevent duplicate usernames (case-sensitive)
         if username in users:
-            flash("Username already exists. Please choose another one.")
+            flash("❌ Username already exists. Please choose another one.")
             return redirect(url_for("register"))
 
+        # save new user
         users[username] = generate_password_hash(password)
         save_users(users)
 
@@ -82,7 +84,7 @@ def register():
         save_user_data(username, "tasks", [])
         save_user_data(username, "events", [])
 
-        flash("Registration successful! Please log in.")
+        flash("✔ Account created successfully! Please log in.")
         return redirect(url_for("login"))
 
     return render_template("register.html")
