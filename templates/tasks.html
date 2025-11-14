@@ -1,31 +1,26 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-  <meta charset="UTF-8">
-  <title>To-Do List</title>
-  <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
-</head>
-<body>
-  <div class="container">
-    <h1>📝 To-Do List</h1>
+{% extends "base.html" %}
+{% block title %}My Tasks{% endblock %}
+{% block content %}
+<div class="max-w-lg mx-auto bg-white p-6 rounded-lg shadow">
+  <h2 class="text-2xl font-bold mb-4 text-center">🧾 My Tasks</h2>
 
-    <form method="POST" action="/add_task">
-      <input type="text" name="task" placeholder="Enter new task" required>
-      <button type="submit">Add Task</button>
-    </form>
+  <form method="POST" class="flex mb-4">
+    <input name="task" placeholder="Add new task..." class="flex-grow border p-2 rounded-l" required>
+    <button class="bg-blue-600 text-white px-4 py-2 rounded-r hover:bg-blue-700">Add</button>
+  </form>
 
-    <h2>Your Tasks</h2>
-    <ul>
-      {% for t in tasks %}
-        <li>{{ t.task }} 
-          <a href="/delete_task/{{ loop.index0 }}">❌</a>
-        </li>
-      {% else %}
-        <p>No tasks yet!</p>
-      {% endfor %}
-    </ul>
-
-    <a class="back-link" href="/">🏠 Back Home</a>
-  </div>
-</body>
-</html>
+  <ul>
+    {% for t in tasks %}
+      <li class="flex justify-between border-b py-2">
+        <span class="{% if t.done %}line-through text-gray-500{% endif %}">
+          {{ loop.index }}. {{ t.task }}
+        </span>
+        <div>
+          <a href="/tasks/toggle/{{ loop.index0 }}" class="text-green-600 hover:underline mr-2">✔</a>
+          <a href="/tasks/delete/{{ loop.index0 }}" class="text-red-600 hover:underline">✖</a>
+        </div>
+      </li>
+    {% endfor %}
+  </ul>
+</div>
+{% endblock %}
